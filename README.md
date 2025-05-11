@@ -1,50 +1,78 @@
-# Welcome to your Expo app 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# 📸 SnapSocial
 
-## Get started
+Welcome to **SnapSocial** – a modern social media platform built with **Expo** and **React Native**! 👋  
+Create, share, and connect through seamless mobile experiences.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## 🚀 Get Started
 
-2. Start the app
+### 1. Install Dependencies
 
-   ```bash
-   npx expo start
-   ```
+```bash
+npm install
+```
 
-In the output, you'll find options to open the app in a
+### 2. Start the App
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+```bash
+npx expo start
+```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+In the output, you’ll find options to open the app in:
 
-## Get a fresh project
+- [Development Build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Android Emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS Simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go) – a limited sandbox for trying out development
 
-When you're ready, run:
+---
+
+## 🧼 Get a Fresh Project
+
+When you're ready to start from scratch:
 
 ```bash
 npm run reset-project
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+This command will move the starter code to the `app-example` directory and create a blank `app` directory for development.
 
-## Learn more
+---
 
-To learn more about developing your project with Expo, look at the following resources:
+## ✨ Features
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- 🔐 User authentication via [Clerk](https://clerk.dev)
+- 🔄 Real-time data synchronization with [Convex](https://convex.dev)
+- 🖼️ Image sharing and viewing capabilities
+- 🤏 Gesture-based interactions
+- 📳 Haptic feedback for enhanced UX
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
+## 📚 Learn More
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [📘 Expo Documentation](https://docs.expo.dev/)
+- [🎓 Learn Expo Tutorial](https://docs.expo.dev/tutorial/introduction/)
+
+---
+
+## 🌍 Join the Community
+
+- [💬 Expo Discord Community](https://chat.expo.dev)
+- [🌐 Expo GitHub](https://github.com/expo/expo)
+
+---
+
+## 🛠️ Built With
+
+- [Expo](https://expo.dev)
+- [React Native](https://reactnative.dev)
+- [Clerk](https://clerk.dev)
+- [Convex](https://convex.dev)
+- [Expo Router](https://expo.github.io/router/docs)
+
+---
+
+**Happy coding! 📱✨**
