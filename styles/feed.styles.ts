@@ -14,9 +14,10 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingVertical: 16,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.surface,
+    marginTop: 18,
   },
   headerTitle: {
     fontSize: 24,

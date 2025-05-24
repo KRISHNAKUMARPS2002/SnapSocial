@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 12,
     borderBottomWidth: 0.5,
     borderBottomColor: COLORS.surface,
+    marginTop: 26,
   },
   headerTitle: {
     fontSize: 18,
