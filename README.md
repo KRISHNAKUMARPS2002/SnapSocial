@@ -1,4 +1,3 @@
-
 # 📸 SnapSocial
 
 Welcome to **SnapSocial** – a modern social media platform built with **Expo** and **React Native**! 👋  
@@ -18,6 +17,8 @@ npm install
 
 ```bash
 npx expo start
+npx expo start --tunnel
+npx expo start -c
 ```
 
 In the output, you’ll find options to open the app in:
