@@ -7,9 +7,11 @@ import { COLORS } from "@/constants/theme";
 import { Id } from "@/convex/_generated/dataModel";
 import { useState } from "react";
 import { toggleLike } from "@/convex/posts";
-import { useMutation } from "convex/react";
+import { useMutation, useQueries, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import CommentsModel from "./CommentsModel";
+import { formatDistanceToNow } from "date-fns";
+import { useUser } from "@clerk/clerk-expo";
 
 type PostProps = {
   post: {
@@ -31,11 +33,21 @@ type PostProps = {
 
 export default function Post({ post }: PostProps) {
   const [isLiked, setIsLiked] = useState(post.isLiked);
+  const [isBookmarked, setIsBookmarked] = useState(post.isBookmarked);
   const [likesCount, setLikesCount] = useState(post.likes);
   const [commentsCount, setcommentsCount] = useState(post.comments);
   const [showComments, setShowComments] = useState(false);
 
+  const { user } = useUser();
+
+  const currentUser = useQuery(
+    api.user.getUserByClerkId,
+    user ? { clerkId: user.id } : "skip"
+  );
+
   const toggleLike = useMutation(api.posts.toggleLike);
+  const toggleBookmark = useMutation(api.bookmarks.toggleBookmark);
+  const deletePost = useMutation(api.posts.deletePost);
 
   const handleLike = async () => {
     try {
@@ -44,6 +56,19 @@ export default function Post({ post }: PostProps) {
       setLikesCount((prev) => (newIsliked ? prev + 1 : prev - 1));
     } catch (error) {
       console.log("Error toggling likes:", error);
+    }
+  };
+
+  const handleBookmark = async () => {
+    const newIsBookmarked = await toggleBookmark({ postId: post._id });
+    setIsBookmarked(newIsBookmarked);
+  };
+
+  const handleDelete = async () => {
+    try {
+      await deletePost({ postId: post._id });
+    } catch (error) {
+      console.error("Error deleting post:", error);
     }
   };
 
@@ -64,14 +89,22 @@ export default function Post({ post }: PostProps) {
             <Text style={styles.postUsername}>{post.author.username}</Text>
           </TouchableOpacity>
         </Link>
-        {/* todo: fix it later */}
-        {/* <TouchableOpacity>
-          <Ionicons name="ellipsis-horizontal" size={20} color={COLORS.white} />
-        </TouchableOpacity> */}
 
-        <TouchableOpacity>
-          <Ionicons name="trash-outline" size={20} color={COLORS.primary} />
-        </TouchableOpacity>
+        {/* If i'm the owner of the post, show the delete button  */}
+
+        {post.author._id === currentUser?._id ? (
+          <TouchableOpacity onPress={handleDelete}>
+            <Ionicons name="trash-outline" size={20} color={COLORS.primary} />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity>
+            <Ionicons
+              name="ellipsis-horizontal"
+              size={20}
+              color={COLORS.white}
+            />
+          </TouchableOpacity>
+        )}
       </View>
 
       {/* IMAGE */}
@@ -101,8 +134,12 @@ export default function Post({ post }: PostProps) {
             />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity>
-          <Ionicons name={"bookmark-outline"} size={22} color={COLORS.white} />
+        <TouchableOpacity onPress={handleBookmark}>
+          <Ionicons
+            name={isBookmarked ? "bookmark" : "bookmark-outline"}
+            size={22}
+            color={COLORS.white}
+          />
         </TouchableOpacity>
       </View>
 
@@ -120,11 +157,17 @@ export default function Post({ post }: PostProps) {
           </View>
         )}
 
-        <TouchableOpacity>
-          <Text style={styles.commentText}>View all 2 comments</Text>
-        </TouchableOpacity>
+        {commentsCount > 0 && (
+          <TouchableOpacity onPress={() => setShowComments(true)}>
+            <Text style={styles.commentText}>
+              View all {commentsCount} comments
+            </Text>
+          </TouchableOpacity>
+        )}
 
-        <Text style={styles.timeAgo}>2 hours ago</Text>
+        <Text style={styles.timeAgo}>
+          {formatDistanceToNow(post._creationTime, { addSuffix: true })}
+        </Text>
       </View>
 
       <CommentsModel

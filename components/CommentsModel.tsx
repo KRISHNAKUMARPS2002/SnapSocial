@@ -35,7 +35,22 @@ export default function CommentsModel({
   const comments = useQuery(api.comments.getComments, { postId });
   const addComment = useMutation(api.comments.addComment);
 
-  const handleAddComment = async () => {};
+  const handleAddComment = async () => {
+    if (!newComment.trim()) return;
+
+    try {
+      await addComment({
+        content: newComment,
+        postId,
+      });
+
+      setNewComment("");
+      onCommentAdded();
+    } catch (error) {
+      console.log("Error adding comment:", error);
+    }
+  };
+
   return (
     <Modal
       visible={visible}
